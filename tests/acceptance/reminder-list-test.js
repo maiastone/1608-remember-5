@@ -18,6 +18,7 @@ test('viewing the homepage', function(assert) {
   });
 });
 
+
 test('clicking on an individual item', function(assert) {
   server.createList('reminder', 5);
 
@@ -28,4 +29,5 @@ test('clicking on an individual item', function(assert) {
     assert.equal(currentURL(), '/1');
     assert.equal(Ember.$('.spec-reminder-item:first').text().trim(), Ember.$('.spec-reminder-title').text().trim());
   });
+
 });
