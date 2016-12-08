@@ -9,15 +9,21 @@ moduleForAcceptance('Acceptance | reminders list');
 
 test('viewing the homepage', function(assert) {
   server.createList('reminder', 5);
-
   visit('/');
-
   andThen(function() {
     assert.equal(currentURL(), '/reminders');
     assert.equal(Ember.$('.spec-reminder-item').length, 5);
   });
 });
 
+
+test('viewing the homepage', function(assert) {
+  server.createList('reminder', 10);
+  visit('/');
+  andThen(function() {
+    assert.equal(Ember.$('.spec-reminder-item').length, 10);
+  });
+});
 
 test('clicking on an individual item', function(assert) {
   server.createList('reminder', 5);
