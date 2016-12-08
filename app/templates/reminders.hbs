@@ -1,7 +1,13 @@
+<section>
+  <ul>
+    {{#each model as |reminder|}}
+      <li class='spec-reminder-item'>
+        {{#link-to 'reminders.reminder' reminder}}
+          {{reminder.title}}
+        {{/link-to}}
+      </li>
+    {{/each}}
+  </ul>
+</section>
 
-<ul>
-  {{#each model as |reminder|}}
-    <li class='spec-reminder-item'>{{reminder.title}}</li>
-  {{/each}}
-</ul>
 {{outlet}}
