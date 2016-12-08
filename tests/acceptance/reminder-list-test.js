@@ -11,10 +11,11 @@ test('viewing the homepage', function(assert) {
   server.createList('reminder', 5);
   visit('/');
   andThen(function() {
-    assert.equal(currentURL(), '/');
+    assert.equal(currentURL(), '/reminders');
     assert.equal(Ember.$('.spec-reminder-item').length, 5);
   });
 });
+
 
 test('viewing the homepage', function(assert) {
   server.createList('reminder', 10);
@@ -34,4 +35,5 @@ test('clicking on an individual item', function(assert) {
     assert.equal(currentURL(), '/1');
     assert.equal(Ember.$('.spec-reminder-item:first').text().trim(), Ember.$('.spec-reminder-title').text().trim());
   });
+
 });
