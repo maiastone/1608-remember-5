@@ -1,9 +1,9 @@
 <section>
   <ul>
     {{#each model as |reminder|}}
-      <li class='spec-reminder-item'>
+      <li>
         {{#link-to 'reminders.reminder' reminder}}
-          {{reminder.title}}
+          <button class='spec-reminder-item'>{{reminder.title}}</button>
         {{/link-to}}
       </li>
     {{/each}}
