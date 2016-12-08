@@ -1,0 +1,18 @@
+li {
+  list-style: none;
+}
+
+.spec-reminder-item {
+  background: none;
+  outline: none;
+  border: none;
+  font-size: 24px;
+}
+
+button:hover {
+  text-decoration: underline;
+}
+
+button:active {
+  color: blue;
+}
