@@ -11,7 +11,7 @@ test('viewing the homepage', function(assert) {
   server.createList('reminder', 5);
   visit('/');
   andThen(function() {
-    assert.equal(currentURL(), '/');
+    assert.equal(currentURL(), '/reminders');
     assert.equal(Ember.$('.spec-reminder-item').length, 5);
   });
 });
