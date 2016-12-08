@@ -36,13 +36,5 @@ test('clicking on an individual item', function(assert) {
     assert.equal(Ember.$('.spec-reminder-item:first').text().trim(), Ember.$('.spec-reminder-title').text().trim());
   });
 
-test(' there should be a button that routes the user to "/new" where users can create a new reminder', function(assert) {
-  visit('/');
-
-  andThen(function() {
-    assert.equal(currentURL(), '/reminders');
-    assert.equal(find('.new-item-button').length, 1, 'Should show the "new item" button');
-  });
-});
 
 });
