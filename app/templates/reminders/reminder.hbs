@@ -2,9 +2,7 @@
   {{#if isEditing}}
 
   <h2>Title{{input class='spec-reminder-title' value=model.title}}</h2>
-  {{#if model.notes}}
-    <h3>Notes{{textarea value=model.notes}}</h3>
-  {{/if}}
+  <h3>Notes{{textarea value=model.notes}}</h3>
   <h3>Date{{input type=date value=model.date}}</h3>
   <button {{action 'saveReminder' model on 'submit'}}>Save</button>
 
