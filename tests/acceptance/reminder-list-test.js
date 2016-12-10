@@ -34,5 +34,17 @@ test('clicking on an individual item', function(assert) {
     assert.equal(Ember.$('.spec-reminder-item:first').text().trim(), Ember.$('.spec-reminder-title').text().trim());
   });
 
+  test('Clicking the new item button will redirect the user to /new', function() {
+    visit('/');
+    click('.new-reminder-button');
+
+    andThen(function() {
+      assert.equal(currentURL(), '/reminders/new');
+    })
+  })
+  test('should see a form to submit a new reminder', function (assert) {
+  })
+  test('should show new reminder on submit', function (assert) {
+})
 
 });
