@@ -7,6 +7,7 @@
   <button {{action 'saveReminder' model on 'submit'}}>Save</button>
 
   {{else}}
+
     <h1 class='spec-reminder-title'>{{model.title}}</h1>
     {{#if model.notes}}
       <p>{{model.notes}}</p>
