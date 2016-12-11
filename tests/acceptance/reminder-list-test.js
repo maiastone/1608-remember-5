@@ -33,8 +33,9 @@ test('clicking on an individual item', function(assert) {
     assert.equal(currentURL(), '/reminders/1');
     assert.equal(Ember.$('.spec-reminder-item:first').text().trim(), Ember.$('.spec-reminder-title').text().trim());
   });
+});
 
-  test('Clicking the new item button will redirect the user to /new', function() {
+  test('Clicking the new reminder button will redirect the user to the route "/new"', function(assert) {
     visit('/');
     click('.new-reminder-button');
 
@@ -47,23 +48,37 @@ test('clicking on an individual item', function(assert) {
     visit('/reminders/new');
 
     andThen(function(){
-      assert.equal(Ember.$('spec-new-reminder--form').length, 1)
+      assert.equal(find('form').length,1, 'user is not able to make a new reminder');
     });
   });
 
   test('should show new reminder on submit', function (assert) {
     visit('/reminders/new');
 
-    fillIn('.spec-input-title', 'Bombs')
-    fillIn('.spec-input-date', 'Over')
-    fillIn('.spec-input-notes', 'Baghdad')
+    fillIn('.spec-input-title', 'Bombs');
+    fillIn('.spec-input-date', '12/11/2016');
+    fillIn('.spec-input-notes', 'Baghdad');
 
-    click('.new-reminder--submit')
+    click('.new-reminder--submit');
 
     andThen(function() {
-      assert.equal(find('h1').text(), 'Bombs', 'should list new reminder name')
-    })
+      assert.equal(find('.spec-reminder-item:last.title').text(), 'Bombs', 'should list new reminder title');
+    });
 
-})
+});
+
+test('should save new reminder on date and notes on submit', function (assert) {
+  visit('/reminders/new');
+
+  fillIn('.spec-input-title', 'Big freaking test title');
+  fillIn('.spec-input-date', '12112016');
+  fillIn('.spec-input-notes', 'A bunch of notes');
+
+  click('.new-reminder--submit');
+
+  andThen(function() {
+    assert.equal(find('.spec-reminder-item.date li:last').text(), "2016-12-11", 'should list new reminder date');
+    assert.equal(find('.spec-reminder-item.notes li:last').text(), 'A bunch of notes', 'should list new reminder notes');
+  });
 
 });
