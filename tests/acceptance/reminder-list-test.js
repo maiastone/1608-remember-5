@@ -56,3 +56,14 @@ test('reminder notes can be edited and saved', function(assert) {
       assert.equal(Ember.$('.spec-reminder-note:first').text().trim(), ('Edit Notes'));
     });
 });
+
+test('reminder date can be edited and saved', function(assert) {
+  server.createList('reminder', 5);
+  visit('reminders/1');
+  click('.edit');
+  fillIn('.spec-edit-date', '2016-12-09');
+  click('.save');
+    andThen(function() {
+      assert.equal(Ember.$('.spec-reminder-date:first').text().trim(), ('Thu Dec 08 2016 17:00:00 GMT-0700 (MST)'));
+    });
+});

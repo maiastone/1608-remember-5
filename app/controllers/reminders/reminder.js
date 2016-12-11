@@ -12,7 +12,7 @@ export default Ember.Controller.extend({
          activeReminder.setProperties({
            title: reminder.title,
            notes: reminder.notes,
-           date: reminder.date,
+           date: new Date(reminder.date),
          });
          activeReminder.save();
        });
