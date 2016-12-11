@@ -33,5 +33,26 @@ test('clicking on an individual item', function(assert) {
     assert.equal(currentURL(), '/reminders/1');
     assert.equal(Ember.$('.spec-reminder-item:first').text().trim(), Ember.$('.spec-reminder-title').text().trim());
   });
+});
 
+test('reminder title can be edited and saved', function(assert) {
+  server.createList('reminder', 5);
+  visit('reminders/1');
+  click('.edit');
+  fillIn('.spec-edit-title', 'Edit Title');
+  click('.save');
+    andThen(function() {
+      assert.equal(Ember.$('.spec-reminder-title:first').text().trim(), ('Edit Title'));
+    });
+});
+
+test('reminder notes can be edited and saved', function(assert) {
+  server.createList('reminder', 5);
+  visit('reminders/1');
+  click('.edit');
+  fillIn('.spec-edit-notes', 'Edit Notes');
+  click('.save');
+    andThen(function() {
+      assert.equal(Ember.$('.spec-reminder-note:first').text().trim(), ('Edit Notes'));
+    });
 });
