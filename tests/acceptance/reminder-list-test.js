@@ -40,11 +40,30 @@ test('clicking on an individual item', function(assert) {
 
     andThen(function() {
       assert.equal(currentURL(), '/reminders/new');
-    })
-  })
+    });
+  });
+
   test('should see a form to submit a new reminder', function (assert) {
-  })
+    visit('/reminders/new');
+
+    andThen(function(){
+      assert.equal(Ember.$('spec-new-reminder--form').length, 1)
+    });
+  });
+
   test('should show new reminder on submit', function (assert) {
+    visit('/reminders/new');
+
+    fillIn('.spec-input-title', 'Bombs')
+    fillIn('.spec-input-date', 'Over')
+    fillIn('.spec-input-notes', 'Baghdad')
+
+    click('.new-reminder--submit')
+
+    andThen(function() {
+      assert.equal(find('h1').text(), 'Bombs', 'should list new reminder name')
+    })
+
 })
 
 });
