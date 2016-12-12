@@ -2,6 +2,6 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model() {
-    return this.get('store').findAll('new-reminder--form');
+    return this.get('store').find('new-reminder--form');
   }
 });
