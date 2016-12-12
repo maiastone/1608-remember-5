@@ -1,5 +1,7 @@
 <div>
   <h2 class='spec-reminder-title'>{{model.title}}</h2>
   <h3 class='spec-reminder-date'>{{model.date}}</h3>
-  <h3 class='spec-reminder-notes'>{{model.notes}}</h3>
+  {{#if model.notes}}
+    <h3 class='spec-reminder-notes'>{{model.notes}}</h3>
+  {{/if}}
 </div>
