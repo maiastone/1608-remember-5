@@ -56,13 +56,13 @@ test('clicking on an individual item', function(assert) {
     visit('/reminders/new');
 
     fillIn('.spec-input-title', 'Bombs');
-    fillIn('.spec-input-date', '12/11/2016');
+    fillIn('.spec-input-date', '2016-12-11');
     fillIn('.spec-input-notes', 'Baghdad');
 
     click('.new-reminder--submit');
 
     andThen(function() {
-      assert.equal(find('.spec-reminder-item:last.title').text(), 'Bombs', 'should list new reminder title');
+      assert.equal(Ember.$('.spec-reminder-title:last').text().trim(), 'Bombs', 'should list new reminder title');
     });
 
 });
@@ -71,7 +71,7 @@ test('should save new reminder on date and notes on submit', function (assert) {
   visit('/reminders/new');
 
   fillIn('.spec-input-title', 'Big freaking test title');
-  fillIn('.spec-input-date', '12112016');
+  fillIn('.spec-input-date', '2016-12-09');
   fillIn('.spec-input-notes', 'A bunch of notes');
 
   click('.new-reminder--submit');
