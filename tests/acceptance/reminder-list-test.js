@@ -7,7 +7,7 @@ import Ember from 'ember';
 
 moduleForAcceptance('Acceptance | reminders list');
 
-test('viewing the homepage', function(assert) {
+test('viewing the reminders page', function(assert) {
   server.createList('reminder', 5);
   visit('/');
   andThen(function() {
@@ -16,7 +16,7 @@ test('viewing the homepage', function(assert) {
   });
 });
 
-test('viewing the homepage', function(assert) {
+test('viewing the reminders', function(assert) {
   server.createList('reminder', 10);
   visit('/');
   andThen(function() {
@@ -24,11 +24,18 @@ test('viewing the homepage', function(assert) {
   });
 });
 
+test('viewing a default welcome page', function(assert) {
+  server.createList('reminder', 10);
+  visit('/');
+  andThen(function() {
+    assert.equal(find('.spec-title').text(), 'remEMBER');
+  });
+});
+
 test('clicking on an individual item', function(assert) {
   server.createList('reminder', 5);
   visit('/');
   click('.spec-reminder-item:first');
-
   andThen(function() {
     assert.equal(currentURL(), '/reminders/1');
     assert.equal(Ember.$('.spec-reminder-item:first').text().trim(), Ember.$('.spec-reminder-title').text().trim());
@@ -70,7 +77,7 @@ test('should save new reminder on date and notes on submit', function (assert) {
   fillIn('.spec-input-notes', 'A bunch of notes');
 
   click('.new-reminder--submit');
-  visit('/reminders/6')
+  visit('/reminders/6');
   andThen(function() {
     assert.equal(Ember.$('.spec-reminder-date:last').text().trim(),('Thu Dec 08 2016 17:00:00 GMT-0700 (MST)'));
     assert.equal(find('.spec-reminder-notes:last').text(),('A bunch of notes'));
