@@ -42,6 +42,39 @@ test('clicking on an individual item', function(assert) {
   });
 });
 
+test('reminder title can be edited and saved', function(assert) {
+  server.createList('reminder', 5);
+  visit('reminders/1');
+  click('.edit');
+  fillIn('.spec-edit-title', 'Edit Title');
+  click('.save');
+    andThen(function() {
+      assert.equal(Ember.$('.spec-reminder-title:first').text().trim(), ('Edit Title'));
+    });
+});
+
+test('reminder notes can be edited and saved', function(assert) {
+  server.createList('reminder', 5);
+  visit('reminders/1');
+  click('.edit');
+  fillIn('.spec-edit-notes', 'Edit Notes');
+  click('.save');
+    andThen(function() {
+      assert.equal(Ember.$('.spec-reminder-note:first').text().trim(), ('Edit Notes'));
+    });
+});
+
+test('reminder date can be edited and saved', function(assert) {
+  server.createList('reminder', 5);
+  visit('reminders/1');
+  click('.edit');
+  fillIn('.spec-edit-date', '2016-12-09');
+  click('.save');
+    andThen(function() {
+      assert.equal(Ember.$('.spec-reminder-date:first').text().trim(), ('Thu Dec 08 2016 17:00:00 GMT-0700 (MST)'));
+    });
+});
+
 test('Clicking the new reminder button will redirect the user to the route "/new"', function(assert) {
   visit('/');
   click('.new-reminder-button');
@@ -80,6 +113,6 @@ test('should save new reminder on date and notes on submit', function (assert) {
   visit('/reminders/6');
   andThen(function() {
     assert.equal(Ember.$('.spec-reminder-date:last').text().trim(),('Thu Dec 08 2016 17:00:00 GMT-0700 (MST)'));
-    assert.equal(find('.spec-reminder-notes:last').text(),('A bunch of notes'));
+    assert.equal(find('.spec-reminder-note:last').text(),('A bunch of notes'));
   });
 });
