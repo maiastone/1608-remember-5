@@ -2,13 +2,20 @@
   <ul>
     {{#each model as |reminder|}}
     <li>
+
       {{#link-to 'reminders.reminder' reminder}}
-      <button class='spec-reminder-item'>{{reminder.title}}</button>
+        <button class='spec-reminder-item'>{{reminder.title}}</button>
       {{/link-to}}
+
+      <button class='edit'>
+        {{#link-to 'reminders.edit'}}
+          EDIT
+        {{/link-to}}
+      </button>
+
     </li>
     {{/each}}
   </ul>
-
-
 </section>
+
 {{outlet}}
