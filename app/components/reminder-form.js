@@ -4,7 +4,7 @@ import Ember from 'ember';
     store: Ember.inject.service(),
 
     actions: {
-      saveReminder(model) {
+      saveReminder() {
         this.sendAction('action', this.get('model'));
         }
       }

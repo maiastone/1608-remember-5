@@ -7,6 +7,9 @@ export default Ember.Route.extend( {
   actions: {
     saveReminder() {
       this.transitionTo('reminders');
+    },
+    undo() {
+      this.get('model').rollbackAttributes();
     }
   }
 });
