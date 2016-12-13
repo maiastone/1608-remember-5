@@ -43,7 +43,7 @@ test('clicking on an individual item', function(assert) {
 });
 
 test('Clicking the new reminder button will redirect the user to the route "/new"', function(assert) {
-  visit('/reminders');
+  visit('/');
   click('.new-reminder-button');
 
   andThen(function() {
