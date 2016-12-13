@@ -5,9 +5,7 @@ import Ember from 'ember';
 
     actions: {
       saveReminder(model) {
-        model.date = model.date || new Date();
-        model.save();
-        this.sendAction();
+        this.sendAction('action', this.get('model'));
         }
       }
     });
