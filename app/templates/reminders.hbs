@@ -15,9 +15,13 @@
       {{/if}}
 
       <button>
-        {{#link-to 'reminders.edit' reminder class='edit'}}
+        {{#link-to 'reminders.edit' reminder class='edit'}}A
           Edit Reminder
         {{/link-to}}
+      </button>
+
+      <button class='delete' {{action 'delete' reminder}}>
+        Delete Reminder
       </button>
 
     </li>
