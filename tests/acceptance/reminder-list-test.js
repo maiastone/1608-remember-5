@@ -10,6 +10,7 @@ moduleForAcceptance('Acceptance | reminders list');
 test('viewing the reminders page', function(assert) {
   server.createList('reminder', 5);
   visit('/');
+  
   andThen(function() {
     assert.equal(currentURL(), '/reminders');
     assert.equal(Ember.$('.spec-reminder-item').length, 5);
@@ -19,6 +20,7 @@ test('viewing the reminders page', function(assert) {
 test('viewing the reminders', function(assert) {
   server.createList('reminder', 10);
   visit('/');
+
   andThen(function() {
     assert.equal(Ember.$('.spec-reminder-item').length, 10);
   });
@@ -27,6 +29,7 @@ test('viewing the reminders', function(assert) {
 test('viewing a default welcome page', function(assert) {
   server.createList('reminder', 10);
   visit('/');
+
   andThen(function() {
     assert.equal(find('.spec-title').text(), 'remEMBER');
   });
@@ -36,6 +39,7 @@ test('clicking on an individual item', function(assert) {
   server.createList('reminder', 5);
   visit('/');
   click('.spec-reminder-item:first');
+
   andThen(function() {
     assert.equal(currentURL(), '/reminders/1');
     assert.equal(Ember.$('.spec-reminder-item:first').text().trim(), Ember.$('.spec-reminder-title').text().trim());
@@ -48,6 +52,7 @@ test('reminder title can be edited and saved', function(assert) {
   click('.edit');
   fillIn('.spec-input-title', 'Edit Title');
   click('.new-reminder--submit');
+
     andThen(function() {
       assert.equal(Ember.$('.spec-reminder-item:first').text().trim(), ('Edit Title'));
     });
@@ -59,9 +64,10 @@ test('reminder notes can be edited and saved', function(assert) {
   click('.edit');
   fillIn('.spec-input-notes', 'Edit Notes');
   click('.new-reminder--submit');
-    andThen(function() {
-      assert.equal(Ember.$('.spec-reminder-note:first').text().trim(), ('Edit Notes'));
-    });
+
+  andThen(function() {
+    assert.equal(Ember.$('.spec-reminder-note:first').text().trim(), ('Edit Notes'));
+  });
 });
 
 test('Clicking the new reminder button will redirect the user to the route "/new"', function(assert) {
@@ -97,46 +103,47 @@ test('should save new reminder on submit', function(assert) {
   fillIn('.spec-input-title', 'Big freaking test title');
   fillIn('.spec-input-date', '2016-12-09');
   fillIn('.spec-input-notes', 'A bunch of notes');
-
   click('.new-reminder--submit');
   visit('/reminders/6');
+
   andThen(function() {
     assert.equal(find('.spec-reminder-note:last').text(),('A bunch of notes'));
   });
 });
 
 test('clicking undo reverts back to the original', function(assert) {
-    visit('/');
-    click('.new-reminder-button');
-    andThen(function() {
-      assert.equal(currentURL(), '/reminders/new');
-    });
-    fillIn('.spec-input-title', 'Title');
-    click('.new-reminder--submit');
-    click('.edit');
-    fillIn('.spec-input-title', 'Edit Title');
-    click('.undo');
+  visit('/');
+  click('.new-reminder-button');
 
-    andThen(function(){
-      assert.equal(find('.spec-reminder-item').text().trim(), 'Title', 'should show original title');
-    });
+  andThen(function() {
+    assert.equal(currentURL(), '/reminders/new');
+  });
+
+  fillIn('.spec-input-title', 'Title');
+  click('.new-reminder--submit');
+  click('.edit');
+  fillIn('.spec-input-title', 'Edit Title');
+  click('.undo');
+
+  andThen(function(){
+    assert.equal(find('.spec-reminder-item').text().trim(), 'Title', 'should show original title');
+  });
 });
 
 test('there is a visual cue for unsaved changes', function(assert) {
   visit('/');
   click('.new-reminder-button');
+
   andThen(function() {
     assert.equal(currentURL(), '/reminders/new');
   });
 
-  fillIn('.spec-title-input', 'Title');
-  fillIn('.spec-date-input', '2016-12-10');
-  fillIn('.spec-note-input', 'Note');
-  click('.spec-save-edits-btn');
-
-  click('.spec-edit-reminder-btn');
-
-  fillIn('.spec-note-input', 'Forget this!');
+  fillIn('.spec-input-title', 'Title');
+  fillIn('.spec-input-date', '2016-12-10');
+  fillIn('.spec-input-notes', 'Note');
+  click('.new-reminder--submit');
+  click('.edit');
+  fillIn('.spec-input-title', 'Change the Title');
 
   andThen(function(){
     assert.equal(find('.unsaved').text().trim(), 'There are unsaved changes.', 'should show alert');

@@ -3,20 +3,19 @@
     {{#each model as |reminder|}}
     <li>
 
-      {{#if reminder.hasDirtyAttributes}}
-          <p class="unsaved">There are unsaved changes.</p>
-      {{/if}}
+      <p class='unsaved'>
+      {{#if reminder.hasDirtyAttributes "There are unsaved changes"}}
+      </p>
 
       {{#link-to 'reminders.reminder' reminder}}
         <button class='spec-reminder-item'>{{reminder.title}}</button>
       {{/link-to}}
-        <p class='spec-reminder-note'>{{reminder.notes}}</p>
-        <p class='spec-reminder-date'>{{reminder.date}}</p>
 
-
-        <button>
-        {{#link-to 'reminders.edit' reminder
-            class='edit'}}
+      <p class='spec-reminder-note'>{{reminder.notes}}</p>
+      <p class='spec-reminder-date'>{{reminder.date}}</p>
+\
+      <button>
+        {{#link-to 'reminders.edit' reminder class='edit'}}
           Edit Reminder
         {{/link-to}}
       </button>
