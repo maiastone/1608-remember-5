@@ -6,9 +6,12 @@
       {{#link-to 'reminders.reminder' reminder}}
         <button class='spec-reminder-item'>{{reminder.title}}</button>
       {{/link-to}}
+        <p class='spec-reminder-note'>{{reminder.notes}}</p>
+        <p class='spec-reminder-date'>{{reminder.date}}</p>
 
-      <button class='edit'>
-        {{#link-to 'reminders.edit' reminder}}
+        <button>
+        {{#link-to 'reminders.edit' reminder
+            class='edit'}}
           Edit Reminder
         {{/link-to}}
       </button>
