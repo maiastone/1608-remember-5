@@ -104,3 +104,24 @@ test('should save new reminder on submit', function (assert) {
     assert.equal(find('.spec-reminder-note:last').text(),('A bunch of notes'));
   });
 });
+
+test('there is a visual cue for unsaved changes', function(assert){
+  visit('/');
+  click('#spec-create-new-reminder-btn');
+  andThen(function() {
+    assert.equal(currentURL(), '/reminders/new');
+  });
+
+  fillIn('.spec-title-input', 'Title');
+  fillIn('.spec-date-input', '2016-12-10');
+  fillIn('.spec-note-input', 'Note');
+  click('.spec-save-edits-btn');
+
+  click('.spec-edit-reminder-btn');
+
+  fillIn('.spec-note-input', 'Forget this!');
+
+  andThen(function(){
+    assert.equal(find('.unsaved').text().trim(), 'Unsaved Changes to Reminder', 'should show alert');
+  });
+});
