@@ -73,7 +73,7 @@ test('Clicking the new reminder button will redirect the user to the route "/new
   });
 });
 
-test('should see a form to submit a new reminder', function (assert) {
+test('should see a form to submit a new reminder', function(assert) {
   visit('/reminders/new');
 
   andThen(function(){
@@ -81,7 +81,7 @@ test('should see a form to submit a new reminder', function (assert) {
   });
 });
 
-test('should show new reminder on submit', function (assert) {
+test('should show new reminder on submit', function(assert) {
   visit('/reminders/new');
   fillIn('.spec-input-title', 'Bombs');
   click('.new-reminder--submit');
@@ -91,7 +91,7 @@ test('should show new reminder on submit', function (assert) {
   });
 });
 
-test('should save new reminder on submit', function (assert) {
+test('should save new reminder on submit', function(assert) {
   server.createList('reminder', 5);
   visit('/reminders/new');
   fillIn('.spec-input-title', 'Big freaking test title');
@@ -105,9 +105,26 @@ test('should save new reminder on submit', function (assert) {
   });
 });
 
-test('there is a visual cue for unsaved changes', function(assert){
+test('clicking undo reverts back to the original', function(assert) {
+    visit('/');
+    click('.new-reminder-button');
+    andThen(function() {
+      assert.equal(currentURL(), '/reminders/new');
+    });
+    fillIn('.spec-input-title', 'Title');
+    click('.new-reminder--submit');
+    click('.edit');
+    fillIn('.spec-input-title', 'Edit Title');
+    click('.undo');
+
+    andThen(function(){
+      assert.equal(find('.spec-reminder-item').text().trim(), 'Title', 'should show original title');
+    });
+});
+
+test('there is a visual cue for unsaved changes', function(assert) {
   visit('/');
-  click('#spec-create-new-reminder-btn');
+  click('.new-reminder-button');
   andThen(function() {
     assert.equal(currentURL(), '/reminders/new');
   });
@@ -122,6 +139,6 @@ test('there is a visual cue for unsaved changes', function(assert){
   fillIn('.spec-note-input', 'Forget this!');
 
   andThen(function(){
-    assert.equal(find('.unsaved').text().trim(), 'Unsaved Changes to Reminder', 'should show alert');
+    assert.equal(find('.unsaved').text().trim(), 'There are unsaved changes.', 'should show alert');
   });
 });

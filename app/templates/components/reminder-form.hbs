@@ -13,12 +13,15 @@
     Notes:
     {{input type="text" value=model.notes class="spec-input-notes"}}
   </label>
-  <button class="new-reminder--submit" {{action 'saveReminder' model on='click'}}>{{text}}</button>
 
-  {{#if edit}}
-  <button {{action "undo" model}} class="spec-revert-changes {{if reminder.hasDirtyAttributes "enabled"}}">
-  {{text-rollback}}</button>
-  {{/if}}
+  <button {{action 'saveReminder' model}}
+    class="new-reminder--submit">
+    {{text}}
+  </button>
 
+  <button {{action "undo" model}}
+    class="undo {{if reminder.hasDirtyAttributes "enabled"}}">
+    {{text-rollback}}
+  </button>
 
 </form>
