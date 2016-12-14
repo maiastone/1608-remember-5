@@ -10,7 +10,7 @@ moduleForAcceptance('Acceptance | reminders list');
 test('viewing the reminders page', function(assert) {
   server.createList('reminder', 5);
   visit('/');
-  
+
   andThen(function() {
     assert.equal(currentURL(), '/reminders');
     assert.equal(Ember.$('.spec-reminder-item').length, 5);
@@ -147,5 +147,25 @@ test('there is a visual cue for unsaved changes', function(assert) {
 
   andThen(function(){
     assert.equal(find('.unsaved').text().trim(), 'There are unsaved changes.', 'should show alert');
+  });
+});
+
+test('reminders are deleted when delete button is clicked both in individual reminder expanded view', function(assert){
+  visit('/');
+  click('.new-reminder-button');
+  fillIn('.spec-input-title', 'Reminder');
+  fillIn('.spec-input-notes', 'Notes');
+  click('.new-reminder--submit');
+  andThen(function(){
+    assert.equal(currentURL(), '/reminders');
+    assert.equal(find('.spec-reminder-item').length, 1, 'should show one new reminder');
+  });
+  click('.spec-reminder-item');
+  andThen(function(){
+    assert.equal(currentURL(), '/reminders/1');
+  });
+  click('.delete');
+  andThen(function(){
+    assert.equal(find('.spec-reminder-item').length, 0, 'should show no reminders');
   });
 });
