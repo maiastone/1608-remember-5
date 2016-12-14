@@ -13,5 +13,9 @@
     Notes:
     {{input type="text" value=model.notes class="spec-input-notes"}}
   </label>
-  <button class="new-reminder--submit" {{action 'saveReminder' model on='click'}}>{{text}}</button>
+  <button
+    class="new-reminder--submit"
+    {{action 'saveReminder' model}}
+    >{{text}}
+  </button>
 </form>
