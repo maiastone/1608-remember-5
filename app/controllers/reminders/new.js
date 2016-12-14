@@ -5,7 +5,6 @@ export default Ember.Controller.extend({
     saveReminder(model) {
       model.date = model.date || new Date();
       model.save();
-      this.transitionToRoute('reminders')
       this.transitionToRoute('reminders');
     }
   }

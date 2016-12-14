@@ -6,6 +6,11 @@ export default Ember.Component.extend({
   actions: {
     saveReminder() {
       this.sendAction('action', this.get('model'));
+    },
+    undo(model) {
+      if(model.get('hasDirtyAttributes')) {
+        model.rollbackAttributes();
+      }
     }
   }
 });
